@@ -1,0 +1,43 @@
+================================================================================
+TASK 2: INSTAGRAM ROBERTA SENTIMENT ANALYSIS
+================================================================================
+
+Model: cardiffnlp/twitter-roberta-base-sentiment
+Input: task1_dataset/InstagramPosts_Base.csv
+Total comments: 150
+Negative comments: 55
+
+Predicted sentiment distribution:
+  negative: 55 (36.7%)
+  neutral: 36 (24.0%)
+  positive: 59 (39.3%)
+
+================================================================================
+METRICS (demo: pseudo-labels)
+================================================================================
+
+Accuracy: 1.0000 (100.00%)
+Macro Precision: 1.0000
+Macro Recall: 1.0000
+Macro F1-Score: 1.0000
+
+Per-class:
+Class      Precision    Recall       F1-Score     Support   
+------------------------------------------------------------
+negative   1.0000       1.0000       1.0000       55        
+neutral    1.0000       1.0000       1.0000       36        
+positive   1.0000       1.0000       1.0000       59        
+
+              precision    recall  f1-score   support
+
+    negative       1.00      1.00      1.00        55
+     neutral       1.00      1.00      1.00        36
+    positive       1.00      1.00      1.00        59
+
+    accuracy                           1.00       150
+   macro avg       1.00      1.00      1.00       150
+weighted avg       1.00      1.00      1.00       150
+
+(Demo metrics use predictions as pseudo-labels. Add 'Sentiment' for real evaluation.)
+
+Negative comments file includes user details for Task 4 XGBoost.

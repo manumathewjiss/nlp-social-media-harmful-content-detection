@@ -1,0 +1,9 @@
+metric,value
+train_accuracy,0.9969166666666667
+test_accuracy,0.969
+macro_precision,0.9690358572667577
+macro_recall,0.969
+macro_f1,0.9689900779262002
+weighted_precision,0.9690358572667578
+weighted_recall,0.969
+weighted_f1,0.9689900779262001

@@ -1,0 +1,16 @@
+======================================================================
+GROUND-TRUTH COMPARISON: XGBoost vs BERT vs KNN
+======================================================================
+
+Test samples: 3000
+
+Metric               XGBoost       BERT          KNN         
+------------------------------------------------------------
+Accuracy             0.9690        0.9720        0.9627      
+Macro Precision      0.9690        0.9738        0.9630      
+Macro Recall         0.9690        0.9720        0.9627      
+Macro F1             0.9690        0.9720        0.9627      
+
+All 3 agree: 2869 (95.6%)
+All 3 agree & correct: 2833 (98.7% of agreements)
+All 3 disagree: 1 (0.0%)

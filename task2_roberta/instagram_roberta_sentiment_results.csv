@@ -1,0 +1,151 @@
+Post_ID,Post_Text,User_Name,Followers,Following,Follower_Following_Ratio,Posts,Posts_Followers_Ratio,Bio,Profile_Picture,External_Link,Mutual_Friends,Threads,clean_text,Predicted_Sentiment,Confidence
+1,The only tragedy is your name,call_me_c.l.e.v.e.l.a.n.d,81,127,0.638,0,0.0,yes,yes,no,no,no,the only tragedy is your name,negative,0.8463708758354187
+2,And she has a brother called bloody,Tom Peluso,80,1010,0.079,4,0.05,no,yes,no,no,no,and she has a brother called bloody,neutral,0.6842153072357178
+3,May be she is what her names says she is,Pweddy Vee,10,930,0.011,0,0.0,no,yes,no,no,no,may be she is what her names says she is,neutral,0.8272227644920349
+4,Sounds like nonsense to me,Tlholeho Nkhahle,181,146,1.24,12,0.066,yes,yes,no,no,no,sounds like nonsense to me,negative,0.9264739155769348
+5,I have a coworker whos named secret,gabriel_thejoker1,18,244,0.074,412,22.889,yes,yes,no,no,no,i have a coworker whos named secret,neutral,0.8949536085128784
+6,"If your hair is so beautiful, why do you wear wigs?",denn_col,337,1808,0.186,6,0.018,yes,yes,no,no,no,"if your hair is so beautiful, why do you wear wigs?",positive,0.5094302296638489
+7,She bleached her hair after this,pablo818valle,44,426,0.103,72,1.636,no,yes,no,no,no,she bleached her hair after this,neutral,0.8669973611831665
+8,What a nightmare,luigim_m,90,203,0.443,41,0.456,no,yes,no,no,no,what a nightmare,negative,0.8784428238868713
+9,Take a loan from bank and divorce her,reyhi_jogobella,840,65,12.923,7,0.008,yes,yes,no,no,yes,take a loan from bank and divorce her,neutral,0.628498375415802
+10,She is such an aweful person,jman33317,102,305,0.334,5,0.049,no,yes,no,no,no,she is such an aweful person,negative,0.9519009590148926
+11,Rude,grumps_437,18,43,0.419,2,0.111,no,yes,no,no,no,rude,negative,0.6433741450309753
+12,She has misophonia,mom4life59,23,1039,0.022,41,1.783,no,yes,no,no,no,she has misophonia,negative,0.9245479106903076
+13,"Said hi to a stranger, I then got shot 469 times",byron.mcb,184,472,0.39,27,0.147,yes,yes,no,no,yes,"said hi to a stranger, i then got shot 469 times",negative,0.7840750217437744
+14,Her biggest mistake is coming to this interview,pes.holic7,1030,746,1.381,0,0.0,yes,yes,no,no,yes,her biggest mistake is coming to this interview,negative,0.8622210621833801
+15,The biggest beefsteak,ibx.michael,27,195,0.138,0,0.0,yes,yes,no,no,no,the biggest beefsteak,neutral,0.4667535722255707
+16,What is he gonna do about it?,c.stodden15,59,368,0.16,0,0.0,yes,yes,no,no,no,what is he gonna do about it?,neutral,0.7538065314292908
+17,Who would even want to touch him?,the_dutchrevert,136k,1444,94.185,558,0.004,yes,yes,yes,no,no,who would even want to touch him?,negative,0.807728111743927
+18,He was a kid why she trying to put him down,hannaaevans,238,213,1.117,377,1.584,yes,yes,no,no,yes,he was a kid why she trying to put him down,negative,0.7629081010818481
+19,Manipulative tears,danny_welch_,477,754,0.633,15,0.031,no,yes,no,no,yes,manipulative tears,negative,0.5012164115905762
+20,They will never stop interrupting you,mushroom_1960,15,490,0.031,0,0.0,no,no,no,no,yes,they will never stop interrupting you,negative,0.7899202704429626
+21,She got possessed,oaltrue,336,4833,0.07,39,0.116,yes,yes,yes,no,yes,she got possessed,negative,0.6827982664108276
+22,"He really thought they were gonna let him talk, didn’t he?",gizzmo1812,46,651,0.071,13,0.283,no,yes,no,no,no,"he really thought they were gonna let him talk, didn t he?",neutral,0.5828968286514282
+23,He was tired of her questions,stinje,193k,2360,81.78,1477,0.008,yes,yes,yes,no,yes,he was tired of her questions,negative,0.6791123747825623
+24,But really he's looking like drawing,callmesheeboo,94,1296,0.073,6,0.064,yes,yes,no,no,yes,but really he's looking like drawing,neutral,0.6500042676925659
+25,Another day felt shameful for someone else,alyr.1402,518,7482,0.069,173,0.334,yes,yes,no,no,yes,another day felt shameful for someone else,negative,0.9423993825912476
+26,And it was this day a villain was created,bobsta.extra,2500,216,11.574,9,0.004,yes,yes,yes,no,no,and it was this day a villain was created,neutral,0.5150360465049744
+27,For the benefit of Tesla shareholders I'd like to say NO,apo180mg,49,2956,0.017,0,0.0,no,yes,no,no,yes,for the benefit of tesla shareholders i'd like to say no,neutral,0.6175628304481506
+28,Weird lol,jeffhathawayfitness,3011,250,12.044,470,0.156,yes,yes,yes,no,yes,weird lol,neutral,0.5084105134010315
+29,Terrible song choice,xnationsgoldenchild,508,6490,0.078,3267,6.431,no,yes,no,no,yes,terrible song choice,negative,0.963320255279541
+30,All of them is also probably the dumbest answer in philosophy,1haluka,167,1304,0.128,21,0.126,yes,yes,yes,no,no,all of them is also probably the dumbest answer in philosophy,negative,0.7863112092018127
+31,Its so sick,crysalexart,141k,702,200.855,1857,0.013,yes,yes,yes,no,yes,its so sick,negative,0.8687520623207092
+32,Mental health update,shehrozecheemabluetick,685,333,2.057,0,0.0,yes,yes,yes,no,yes,mental health update,neutral,0.8852701783180237
+33,She answered as a dishwasher,_akash_9073,50,5,10.0,2,0.04,yes,yes,no,no,yes,she answered as a dishwasher,neutral,0.7936745285987854
+34,He never walked on the moon,mascha.willemsen,3211,838,3.832,177,0.055,yes,yes,yes,no,no,he never walked on the moon,neutral,0.6381983757019043
+35,That’s horrible,lucillehost,597,729,0.819,351,0.588,yes,yes,yes,no,no,that s horrible,negative,0.9483148455619812
+36,I have faith in my evil,dr.lolipun,49,273,0.179,0,0.0,no,yes,no,no,yes,i have faith in my evil,neutral,0.5663127899169922
+37,"Bro had the talent, he just needed a vocal coach",the.golden.f_,599,216,2.773,25,0.042,yes,yes,no,no,no,"bro had the talent, he just needed a vocal coach",neutral,0.6026644110679626
+38,It took me a while to figure out what song he was even singing,dasteamworks,284,818,0.347,268,0.944,yes,yes,yes,no,yes,it took me a while to figure out what song he was even singing,negative,0.5522955060005188
+39,A degree doesn’t mean you are samart either,john_e_b_0512,11,204,0.054,361,32.818,yes,yes,yes,no,yes,a degree doesn t mean you are samart either,neutral,0.4928799569606781
+40,And didn’t even blink saying it,jairdoeshair,1.2M,4093,293.183,1428,0.001,yes,yes,yes,yes,yes,and didn t even blink saying it,neutral,0.6336126923561096
+41,The original chaos queen,ajodudu,285k,6552,43.495,3185,0.011,yes,yes,yes,no,no,the original chaos queen,neutral,0.7995738983154297
+42,Is he AI? He looks different lol,sackbailey,885,529,1.674,36,0.041,yes,yes,yes,no,yes,is he ai? he looks different lol,neutral,0.7881069779396057
+43,This was so inspiring until it wasn’t,itstinatonic,3716,665,5.588,43,0.012,yes,yes,yes,no,yes,this was so inspiring until it wasn t,positive,0.7892158031463623
+44,Stop the madness,iamembraca,11.6k,165,70.303,12,0.001,yes,yes,yes,no,no,stop the madness,negative,0.8069908618927002
+45,Overacting,m.mohsin.1,114,2092,0.054,17,0.149,yes,yes,no,no,yes,overacting,negative,0.8300204873085022
+46,Spent all that money and still looks basic,caterita79,207,2136,0.097,69,0.333,yes,yes,no,no,no,spent all that money and still looks basic,negative,0.9191779494285583
+47,Why does she sound like shes about to cry,joannemsachse,110,185,0.595,256,2.327,yes,yes,yes,no,no,why does she sound like shes about to cry,negative,0.8809774518013
+48,Serves her right,terrirose202,24,60,0.4,61,2.542,yes,yes,no,no,no,serves her right,neutral,0.695524275302887
+49,But who is supporting who,kaijuwriter,438,7482,0.059,132,0.301,yes,yes,no,no,yes,but who is supporting who,neutral,0.748759925365448
+50,Good at singing vs Good morning,orewakelu,353,183,1.929,1,0.003,yes,yes,no,no,no,good at singing vs good morning,positive,0.7644756436347961
+51,Now you’ve ruined your career lol,ghostface319_,5,41,0.122,0,0.0,no,yes,no,no,yes,now you ve ruined your career lol,negative,0.8236426115036011
+52,Get educated,michaelgoatjordan23,489,2379,0.206,26,0.053,yes,yes,no,no,no,get educated,neutral,0.6118724942207336
+53,"Why are you so quiet on Sudan, Congo and Nigeria? Why do you support terrorism?",spooney100,169,576,0.293,395,2.337,no,no,no,no,no,"why are you so quiet on sudan, congo and nigeria? why do you support terrorism?",negative,0.9005153179168701
+54,"No longer a fan, bye bye!!!",jilliannfinn,661,1178,0.561,32,0.048,yes,yes,no,no,yes,"no longer a fan, bye bye!!!",negative,0.8709590435028076
+55,"magine saying you love abortions, what a sick comment",dani_yarll,777,795,0.977,1244,1.601,yes,yes,no,no,no,"magine saying you love abortions, what a sick comment",negative,0.932055652141571
+56,Nobody likes your music zara,sacha_martel01,34,138,0.246,8,0.235,yes,yes,no,no,yes,nobody likes your music zara,negative,0.9619020223617554
+57,I’m gonna take a piss on your records today,klazthebeatmaker,7437,966,7.699,1316,0.177,yes,yes,yes,no,no,i m gonna take a piss on your records today,negative,0.901629626750946
+58,Satan himself,hairbyrandivaldez,777,389,1.997,2939,3.782,yes,yes,no,no,yes,satan himself,neutral,0.712355375289917
+59,i can’t believe people are still supporting her,quackhead._,705,1635,0.431,6,0.009,yes,yes,no,no,yes,i can t believe people are still supporting her,negative,0.9030673503875732
+60,What the actual fuck?,kz_rayan_,1243,539,2.306,1,0.001,yes,yes,no,no,no,what the actual fuck?,negative,0.9571681022644043
+61,The fuck,mia.ranieri,924,1230,0.751,8,0.009,no,yes,yes,no,yes,the fuck,negative,0.9100518822669983
+62,Racist,_.loonietuunes._,426,612,0.696,29,0.068,yes,yes,no,no,no,racist,negative,0.7339133024215698
+63,I'm surprised you still have a career,_aries_907_,215,882,0.244,2928,13.619,yes,yes,no,no,yes,i'm surprised you still have a career,negative,0.5514691472053528
+64,Why am I still on the autistic side of instagram?..,rashanasar331,54,12,4.5,0,0.0,no,no,no,no,no,why am i still on the autistic side of instagram?..,negative,0.7450928092002869
+65,You are ill in the head,feefeecameron,483,1591,0.304,636,1.316,yes,yes,yes,no,yes,you are ill in the head,negative,0.9474579691886902
+66,this is incredibly offensive,amchvw,1574,1007,1.563,128,0.081,yes,yes,yes,no,no,this is incredibly offensive,negative,0.9693482518196106
+67,"Shame bro, shame on you",themythbehindbar,1130,341,3.314,2,0.002,yes,yes,no,no,no,"shame bro, shame on you",negative,0.9310598373413086
+68,childish and racist and perv,inok_52_,86,370,0.232,40,0.465,yes,yes,no,no,yes,childish and racist and perv,negative,0.9489073157310486
+69,More racist antics.,scarredexcess,129,702,0.184,133,1.031,yes,yes,no,no,yes,more racist antics.,negative,0.8998772501945496
+70,You are so racist idiot!!!,anonymous_kingss,38,156,0.244,1,0.026,no,yes,no,no,no,you are so racist idiot!!!,negative,0.9750256538391113
+71,STUPID,hunter_is_littt_,61,437,,27,,yes,yes,no,no,no,stupid,negative,0.8772448301315308
+72,Ye it won't be the same cuz you disgraced the country,__takuu_,205,333,,5,,yes,yes,yes,no,no,ye it won't be the same cuz you disgraced the country,negative,0.9624325037002563
+73,"We, Japanese people don’t like you...we don’t appreciate that you are going back there..",mimimama0817,105,1029,,1907,,yes,yes,no,no,no,"we, japanese people don t like you...we don t appreciate that you are going back there..",negative,0.954316258430481
+74,*cough cough* racist,spicy._.trash,95,840,,0,,yes,yes,no,no,no,cough cough racist,negative,0.9433668851852417
+75,Yea. Bc u ruined it,ivyjosephinee,157,315,,77,,yes,yes,no,no,no,yea. bc u ruined it,negative,0.8861382007598877
+76,shut up,wifey.is.myself.lol,50,75,,52,,yes,yes,no,no,no,shut up,negative,0.6838659644126892
+77,Youre such an idiot,belnobelle,1434,330,,41,,yes,yes,no,no,no,youre such an idiot,negative,0.9745618104934692
+78,That’s quite racist,nawafxxmax1230,11,36,,5,,no,yes,no,no,no,that s quite racist,negative,0.8981181979179382
+79,Now everyone hates you including me,molli_harrell74,831,269,,38,,yes,yes,no,no,no,now everyone hates you including me,negative,0.9567806720733643
+80,Just showing how obnoxious and stupid you’re being such a role model to rest of the Americans. Smh,wildheartdori,381,1175,,408,,yes,yes,yes,no,yes,just showing how obnoxious and stupid you re being such a role model to rest of the americans. smh,negative,0.956089973449707
+81,Cutest,ivan_pulpon2_,207,984,,4,,yes,yes,no,no,no,cutest,positive,0.8623060584068298
+82,Beauty,walterbrian1990,0,169,,25,,no,no,no,no,no,beauty,positive,0.5650078058242798
+83,True angel,malclee84,78,559,,60,,no,yes,no,no,yes,true angel,positive,0.8088394999504089
+84,Amazing and beautiful,walkerspcandlaptop,459,4148,,609,,yes,yes,yes,no,yes,amazing and beautiful,positive,0.9531790018081665
+85,Princess,angelit.pg,300,887,,10,,yes,yes,no,no,no,princess,neutral,0.7124863266944885
+86,Lovely lovely stuff,oliviagmoss,27k,2313,,150,,yes,yes,no,no,yes,lovely lovely stuff,positive,0.9846187233924866
+87,Oooo I recognise that little heavenly place,julie_akeroyd_,368,3051,,613,,no,yes,no,no,yes,oooo i recognise that little heavenly place,positive,0.76891028881073
+88,Looking gorgeous as always dear,christinecarder2022,111,399,,545,,no,yes,no,no,yes,looking gorgeous as always dear,positive,0.9804908633232117
+89,Woww,sharukzeolitestore,823,6920,,166,,yes,yes,yes,no,no,woww,neutral,0.6070592403411865
+90,"Congratulations you sweet angel, so deserved",rumerwillis,1.2M,3448,,461,,yes,yes,yes,yes,yes,"congratulations you sweet angel, so deserved",positive,0.9870229363441467
+91,Such a beautiful moving performance! Congrats!,reesewitherspoon,30.4M,1129,,889,,YES,yes,yes,no,yes,such a beautiful moving performance! congrats!,positive,0.9925129413604736
+92,We couldn’t be more proud of you,lorealparis,11.8M,58,,5629,,yes,yes,yes,yes,yes,we couldn t be more proud of you,positive,0.9754970073699951
+93,This is too good,chloe_kay,1933,837,,17,,no,yes,no,no,no,this is too good,positive,0.9868660569190979
+94,You guys are both so attractive,maybepoirot,567,8,,20,,yes,yes,yes,no,yes,you guys are both so attractive,positive,0.980209469795227
+95,He knows how to be respectful,hugeanimalfanatic,89,104,,230,,yes,yes,yes,no,yes,he knows how to be respectful,neutral,0.5458151698112488
+96,"You are happy now, means your dream has also come true. God bless you",mikhail_sangeet,2407,965,,164,,yes,yes,yes,no,no,"you are happy now, means your dream has also come true. god bless you",positive,0.9840037226676941
+97,So much glowing,abhil7221,13,11,,79,,yes,yes,no,no,no,so much glowing,positive,0.7852246761322021
+98,You looking fabulous,harshchoudhary1248,53,60,,18,,yes,yes,no,no,yes,you looking fabulous,positive,0.9646050930023193
+99,Excellent,hmdjwyd6377,199,608,,14,,no,yes,no,no,no,excellent,positive,0.9086723923683167
+100,Nice,_okasha.shabbir_,1,1,,0,,no,yes,no,no,no,nice,positive,0.6387200355529785
+101,"Ohooo you finally did it, dream accomplished",rithin_krishna_,190,191,,10,,yes,yes,no,no,no,"ohooo you finally did it, dream accomplished",positive,0.9568033814430237
+102,The Greatest,garretthedlund,181k,720,,194,,yes,yes,yes,no,yes,the greatest,positive,0.7644415497779846
+103,Perfect pair,lalignenyc,189k,1375,,3823,,yes,yes,yes,no,no,perfect pair,positive,0.7725292444229126
+104,Best time,kellygrace1010,19.1k,1678,,476,,yes,yes,no,no,no,best time,positive,0.8320287466049194
+105,Joyful day in family,natalia_nn_,896,4416,,68,,yes,yes,yes,no,no,joyful day in family,positive,0.912320077419281
+106,He's cute,arab_emma_roberts,54,53,,12,,yes,yes,no,no,no,he's cute,positive,0.9587230682373047
+107,Can't believe he's 5 already,youremmaupdates,1499,302,,1367,,yes,yes,yes,no,no,can't believe he's 5 already,neutral,0.4820999801158905
+108,Cutest thing ever,aliii_ssss_,6,77,,0,,no,yes,no,no,no,cutest thing ever,positive,0.9551300406455994
+109,Omg I love the name!! Congrats you guys,ashleytisdalefrench,16M,1035,,237,,yes,yes,yes,yes,no,omg i love the name!! congrats you guys,positive,0.9920303821563721
+110,Omg Love these!!!,_jaiah_17_,297,7496,,58,,yes,yes,no,no,no,omg love these!!!,positive,0.9873550534248352
+111,Ohh so great,melamurphyhair,1170,689,,223,,yes,yes,no,no,yes,ohh so great,positive,0.9752018451690674
+112,Pure talent,6h05tf4c3,32,1457,,0,,yes,yes,no,no,yes,pure talent,positive,0.5850527286529541
+113,This looks amazing,mellysandford,1.2M,805,,1232,,yes,yes,yes,no,no,this looks amazing,positive,0.985892117023468
+114,King we miss you,wrumscheidt,728,1281,,73,,yes,yes,yes,no,yes,king we miss you,neutral,0.5868484377861023
+115,Handsome,javiergermanlv,2368,470,,28,,yes,yes,yes,no,yes,handsome,positive,0.7425129413604736
+116,Obsessed with you,melissaarrose,5370,753,,42,,yes,yes,yes,no,no,obsessed with you,negative,0.6400861740112305
+117,Oh he's glowing,kadangibson,2094,1741,,59,,yes,yes,no,no,yes,oh he's glowing,positive,0.9464663863182068
+118,Stunning,torybiggs_,1080,713,,98,,no,yes,yes,no,no,stunning,positive,0.7853529453277588
+119,Swag!,rowenxyz,514,128,,7,,yes,yes,no,no,no,swag!,neutral,0.5659581422805786
+120,Why is this dude famous,theasscancer,143,418,,79,,no,yes,no,no,yes,why is this dude famous,neutral,0.510118305683136
+121,Her personality is amazing,faveim74,629,1052,,21,,yes,yes,yes,no,yes,her personality is amazing,positive,0.9796874523162842
+122,Everyone looks so happy,elmo.street58_lly,359,441,,0,,yes,yes,no,no,no,everyone looks so happy,positive,0.9844441413879395
+123,Good days,a_m_i_r_ab22,29,148,,2,,no,no,no,no,no,good days,positive,0.8455700874328613
+124,Bring these shows back,amazanechannel,390k,2422,,885,,yes,yes,yes,no,no,bring these shows back,neutral,0.548691987991333
+125,My sister is good at this,ridchyy,976,1012,,34,,yes,yes,yes,no,no,my sister is good at this,positive,0.8416381478309631
+126,You have a perfect face for the audio,imslwr_06,116,306,,27,,yes,yes,no,no,yes,you have a perfect face for the audio,positive,0.9408681392669678
+127,"You have a special way of thinking, that makes people appreciate your silence",mandychenga,349,139,,11,,yes,yes,no,no,yes,"you have a special way of thinking, that makes people appreciate your silence",positive,0.5463576912879944
+128,Incredible use of her platform,monalogue,1M,762,,1019,,yes,yes,no,no,no,incredible use of her platform,positive,0.852263867855072
+129,He's so casual about creating one of the greatest shows of all time,autumnmarielubin,1696,573,,92,,yes,yes,no,no,no,he's so casual about creating one of the greatest shows of all time,positive,0.6784842014312744
+130,Woww he was really young when he created them,jhonnysworld94,319,697,,26,,yes,yes,no,no,yes,woww he was really young when he created them,neutral,0.5138279795646667
+131,So brave so strong,blakethebilder,1.1M,286,,2027,,yes,yes,yes,no,no,so brave so strong,positive,0.9146077036857605
+132,The boy will get a bigger reward wait and see,rosiealwagfi,183,419,,452,,yes,yes,no,no,yes,the boy will get a bigger reward wait and see,positive,0.8333238363265991
+133,Love this,danielaibarratv,1277,1055,,175,,yes,yes,no,no,yes,love this,positive,0.9636521935462952
+134,So well said. I am thankful I had the chance to get to know you on this trip.,kristenclifton,1047,1614,,2005,,yes,yes,yes,no,no,so well said. i am thankful i had the chance to get to know you on this trip.,positive,0.9850454926490784
+135,Cool mann,davidrodriguee,64.2k,1543,,4244,,yes,yes,yes,no,no,cool mann,positive,0.8426010012626648
+136,What model is the shoes? They are so clean,kchang711,254,328,,12,,yes,yes,no,no,no,what model is the shoes? they are so clean,positive,0.9082568883895874
+137,Lucky you,annhernandez5701,170,4539,,34,,no,yes,no,no,no,lucky you,negative,0.6674965023994446
+138,Rocky is perfect and I love him,wifey_auntie_somm,1514,1075,,395,,yes,yes,yes,no,no,rocky is perfect and i love him,positive,0.9822896122932434
+139,They are truly the best dogs,jmcramer94,674,1287,,211,,yes,yes,no,no,no,they are truly the best dogs,positive,0.9851738810539246
+140,Too adorable,maryhwestbrook,185,1799,,513,,no,yes,no,no,no,too adorable,positive,0.9539000988006592
+141,Cuteness overload,derycksally,59,184,,113,,yes,yes,no,no,yes,cuteness overload,negative,0.7386531829833984
+142,Incredible,ronmartinez36,20,88,,0,,no,yes,no,no,yes,incredible,positive,0.7571741342544556
+143,Awesome,ehosta2003,56,215,,1,,no,no,no,no,yes,awesome,positive,0.7797298431396484
+144,Living the best,adz_hereee,1117,1113,,8,,yes,yes,no,no,no,living the best,positive,0.9133099913597107
+145,He was nice and respectful,kur0.00000,164,1412,,1,,no,yes,no,no,yes,he was nice and respectful,positive,0.9229703545570374
+146,Love vibes,andresdmontoya,4845,1039,,344,,yes,yes,no,no,no,love vibes,positive,0.9433241486549377
+147,Cool,massimogiannetti,3390,1293,,534,,yes,yes,no,no,yes,cool,positive,0.7715893983840942
+148,Just vibes,dvnieldavid,6228,1672,,457,,yes,yes,yes,no,yes,just vibes,neutral,0.6619992256164551
+149,Made for that sweater,rafpulber,350,272,,0,,yes,yes,no,no,no,made for that sweater,neutral,0.5121522545814514
+150,Wonderful,knowstatiana,2,59,,8,,no,yes,no,no,no,wonderful,positive,0.7207363843917847

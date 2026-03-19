@@ -1,0 +1,28 @@
+================================================================================
+LIMFAAD BERT MODEL EVALUATION REPORT
+================================================================================
+
+Model: BERT (bert-base-uncased)
+Training Date: 2026-03-13 15:40:34
+Dataset: LIMFADD.csv
+Train samples: 12000, Test samples: 3000
+
+Test Accuracy: 0.9720
+Macro F1: 0.9720
+
+              precision    recall  f1-score   support
+
+         Bot       1.00      0.98      0.99       750
+        Real       1.00      0.91      0.95       750
+        Scam       0.98      1.00      0.99       750
+        Spam       0.92      1.00      0.95       750
+
+    accuracy                           0.97      3000
+   macro avg       0.97      0.97      0.97      3000
+weighted avg       0.97      0.97      0.97      3000
+
+Confusion Matrix (rows=true, cols=pred):
+[[737   0  13   0]
+ [  0 682   0  68]
+ [  0   0 750   0]
+ [  0   3   0 747]]

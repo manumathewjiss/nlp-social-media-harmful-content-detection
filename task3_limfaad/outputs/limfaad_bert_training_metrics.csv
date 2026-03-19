@@ -1,0 +1,8 @@
+metric,value
+test_accuracy,0.972
+macro_precision,0.9737867118176057
+macro_recall,0.972
+macro_f1,0.9719551501464982
+weighted_precision,0.9737867118176058
+weighted_recall,0.972
+weighted_f1,0.9719551501464981

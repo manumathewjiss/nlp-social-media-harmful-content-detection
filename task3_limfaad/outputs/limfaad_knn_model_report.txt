@@ -1,0 +1,38 @@
+================================================================================
+LIMFAAD KNN MODEL EVALUATION REPORT
+================================================================================
+
+Model: K-Nearest Neighbours (k=9, metric=euclidean)
+Training Date: 2026-03-13 10:08:04
+Dataset: LIMFADD.csv
+Train samples: 12000, Test samples: 3000
+
+Cross-validation k search:
+  k=  3: 0.9638
+  k=  5: 0.9662
+  k=  7: 0.9644
+  k=  9: 0.9667 ← best
+  k= 11: 0.9645
+  k= 15: 0.9633
+  k= 21: 0.9611
+
+Training Accuracy: 0.9736
+Test Accuracy    : 0.9627
+Macro F1         : 0.9627
+
+              precision    recall  f1-score   support
+
+         Bot       1.00      0.97      0.99       750
+        Real       0.95      0.93      0.94       750
+        Scam       0.97      1.00      0.98       750
+        Spam       0.93      0.95      0.94       750
+
+    accuracy                           0.96      3000
+   macro avg       0.96      0.96      0.96      3000
+weighted avg       0.96      0.96      0.96      3000
+
+Confusion Matrix (rows=true, cols=predicted):
+[[728   0  22   0]
+ [  0 696   0  54]
+ [  0   0 750   0]
+ [  0  34   2 714]]

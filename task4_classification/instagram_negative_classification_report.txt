@@ -1,0 +1,43 @@
+================================================================================
+TASK 4: NEGATIVE-COMMENT USER PROFILES CLASSIFICATION
+================================================================================
+
+Model: XGBoost (LIMFAAD-trained)
+Input: outputs/instagram_roberta_negative_comments.csv
+Total accounts: 55
+
+Classification distribution:
+  Bot: 6 (10.9%)
+  Real: 30 (54.5%)
+  Scam: 4 (7.3%)
+  Spam: 15 (27.3%)
+
+================================================================================
+METRICS (demo: pseudo-labels)
+================================================================================
+
+Accuracy: 1.0000 (100.00%)
+Macro Precision: 1.0000
+Macro Recall: 1.0000
+Macro F1-Score: 1.0000
+
+Per-class:
+Class      Precision    Recall       F1-Score     Support   
+------------------------------------------------------------
+Bot        1.0000       1.0000       1.0000       6         
+Real       1.0000       1.0000       1.0000       30        
+Scam       1.0000       1.0000       1.0000       4         
+Spam       1.0000       1.0000       1.0000       15        
+
+              precision    recall  f1-score   support
+
+         Bot       1.00      1.00      1.00         6
+        Real       1.00      1.00      1.00        30
+        Scam       1.00      1.00      1.00         4
+        Spam       1.00      1.00      1.00        15
+
+    accuracy                           1.00        55
+   macro avg       1.00      1.00      1.00        55
+weighted avg       1.00      1.00      1.00        55
+
+(Demo metrics use predictions as pseudo-labels. Add 'Labels' for real evaluation.)

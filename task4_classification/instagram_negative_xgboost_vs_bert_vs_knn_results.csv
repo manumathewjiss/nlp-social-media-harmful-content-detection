@@ -1,0 +1,56 @@
+Post_ID,Post_Text,User_Name,Followers,Following,Posts,Predicted_Label_XGBoost,Confidence_XGBoost,Predicted_Label_BERT,Confidence_BERT,Predicted_Label_KNN,Confidence_KNN,Agreement_XGB_BERT,Agreement_XGB_KNN
+1,The only tragedy is your name,call_me_c.l.e.v.e.l.a.n.d,81,127,0,Scam,0.46792200207710266,Bot,0.9939697980880737,Scam,1.0,False,True
+4,Sounds like nonsense to me,Tlholeho Nkhahle,181,146,12,Real,0.8101881742477417,Bot,0.9930927753448486,Scam,1.0,False,False
+8,What a nightmare,luigim_m,90,203,41,Spam,0.6213921308517456,Bot,0.9952410459518433,Scam,0.7777777777777778,False,False
+10,She is such an aweful person,jman33317,102,305,5,Scam,0.43082189559936523,Bot,0.994440495967865,Bot,1.0,False,False
+11,Rude,grumps_437,18,43,2,Bot,0.5931469798088074,Bot,0.9956450462341309,Scam,1.0,True,False
+12,She has misophonia,mom4life59,23,1039,41,Spam,0.5855866074562073,Bot,0.9966174960136414,Bot,1.0,False,False
+13,"Said hi to a stranger, I then got shot 469 times",byron.mcb,184,472,27,Real,0.7978602051734924,Bot,0.988422691822052,Spam,0.6666666666666666,False,False
+14,Her biggest mistake is coming to this interview,pes.holic7,1030,746,0,Spam,0.676695704460144,Real,0.8759912848472595,Spam,0.6666666666666666,False,True
+17,Who would even want to touch him?,the_dutchrevert,136000,1444,558,Spam,0.9992501139640808,Spam,0.9950994849205017,Spam,1.0,True,True
+18,He was a kid why she trying to put him down,hannaaevans,238,213,377,Real,0.7781275510787964,Bot,0.9748663306236267,Spam,0.6666666666666666,False,False
+19,Manipulative tears,danny_welch_,477,754,15,Spam,0.8396410942077637,Bot,0.9940179586410522,Spam,0.8888888888888888,False,True
+20,They will never stop interrupting you,mushroom_1960,15,490,0,Bot,0.9967415928840637,Bot,0.995018482208252,Spam,0.8888888888888888,True,False
+21,She got possessed,oaltrue,336,4833,39,Real,0.9238026142120361,Bot,0.739533007144928,Real,1.0,False,True
+23,He was tired of her questions,stinje,193000,2360,1477,Real,0.5766267776489258,Real,0.9968686699867249,Spam,1.0,True,False
+25,Another day felt shameful for someone else,alyr.1402,518,7482,173,Real,0.9537565112113953,Bot,0.7912958264350891,Bot,1.0,False,False
+29,Terrible song choice,xnationsgoldenchild,508,6490,3267,Real,0.9998119473457336,Real,0.9971737861633301,Real,1.0,True,True
+30,All of them is also probably the dumbest answer in philosophy,1haluka,167,1304,21,Real,0.7993361353874207,Real,0.9963646531105042,Spam,0.5555555555555556,True,False
+31,Its so sick,crysalexart,141000,702,1857,Spam,0.7151358723640442,Real,0.9460328817367554,Spam,1.0,False,True
+35,That’s horrible,lucillehost,597,729,351,Spam,0.7189227342605591,Real,0.5342274904251099,Spam,0.5555555555555556,False,True
+38,It took me a while to figure out what song he was even singing,dasteamworks,284,818,268,Spam,0.5845606923103333,Bot,0.9646850824356079,Real,0.5555555555555556,False,False
+44,Stop the madness,iamembraca,11600,165,12,Spam,0.7994208931922913,Real,0.5645537972450256,Spam,0.6666666666666666,False,True
+45,Overacting,m.mohsin.1,114,2092,17,Real,0.8566656708717346,Real,0.9884064793586731,Real,0.7777777777777778,True,True
+46,Spent all that money and still looks basic,caterita79,207,2136,69,Real,0.8135802745819092,Real,0.9962724447250366,Scam,0.7777777777777778,True,False
+47,Why does she sound like shes about to cry,joannemsachse,110,185,256,Real,0.9586244225502014,Bot,0.9922148585319519,Spam,0.6666666666666666,False,False
+51,Now you’ve ruined your career lol,ghostface319_,5,41,0,Scam,0.999693751335144,Scam,0.9935210347175598,Spam,0.8888888888888888,True,False
+53,"Why are you so quiet on Sudan, Congo and Nigeria? Why do you support terrorism?",spooney100,169,576,395,Real,0.9620831608772278,Bot,0.9951136708259583,Scam,0.3333333333333333,False,False
+54,"No longer a fan, bye bye!!!",jilliannfinn,661,1178,32,Real,0.9629530906677246,Real,0.9971097111701965,Real,0.6666666666666666,True,True
+55,"magine saying you love abortions, what a sick comment",dani_yarll,777,795,1244,Real,0.9984188079833984,Real,0.9966437816619873,Real,1.0,True,True
+56,Nobody likes your music zara,sacha_martel01,34,138,8,Real,0.7871221303939819,Bot,0.9942589998245239,Spam,0.6666666666666666,False,False
+57,I’m gonna take a piss on your records today,klazthebeatmaker,7437,966,1316,Real,0.9928984642028809,Real,0.9968608617782593,Real,1.0,True,True
+59,i can’t believe people are still supporting her,quackhead._,705,1635,6,Real,0.9672621488571167,Real,0.9966179728507996,Real,0.7777777777777778,True,True
+60,What the actual fuck?,kz_rayan_,1243,539,1,Spam,0.44019317626953125,Real,0.769554078578949,Scam,1.0,False,False
+61,The fuck,mia.ranieri,924,1230,8,Real,0.938340961933136,Real,0.9968318343162537,Spam,0.6666666666666666,True,False
+62,Racist,_.loonietuunes._,426,612,29,Spam,0.8232386112213135,Bot,0.9923142790794373,Scam,1.0,False,False
+63,I'm surprised you still have a career,_aries_907_,215,882,2928,Real,0.9998950958251953,Real,0.9969209432601929,Real,1.0,True,True
+64,Why am I still on the autistic side of instagram?..,rashanasar331,54,12,0,Bot,0.48714834451675415,Bot,0.995500385761261,Scam,1.0,True,False
+65,You are ill in the head,feefeecameron,483,1591,636,Real,0.9909951090812683,Real,0.9971803426742554,Real,0.8888888888888888,True,True
+66,this is incredibly offensive,amchvw,1574,1007,128,Spam,0.9524205923080444,Real,0.9958853125572205,Spam,0.6666666666666666,False,True
+67,"Shame bro, shame on you",themythbehindbar,1130,341,2,Real,0.3787115812301636,Real,0.8066322207450867,Scam,1.0,True,False
+68,childish and racist and perv,inok_52_,86,370,40,Real,0.7730516791343689,Bot,0.9933399558067322,Spam,0.7777777777777778,False,False
+69,More racist antics.,scarredexcess,129,702,133,Real,0.6716881394386292,Bot,0.962647020816803,Spam,0.5555555555555556,False,False
+70,You are so racist idiot!!!,anonymous_kingss,38,156,1,Bot,0.6628706455230713,Bot,0.9956932663917542,Scam,1.0,True,False
+71,STUPID,hunter_is_littt_,61,437,27,Real,0.5790223479270935,Bot,0.9939109086990356,Scam,1.0,False,False
+72,Ye it won't be the same cuz you disgraced the country,__takuu_,205,333,5,Real,0.5398920178413391,Bot,0.959458589553833,Spam,0.6666666666666666,False,False
+73,"We, Japanese people don’t like you...we don’t appreciate that you are going back there..",mimimama0817,105,1029,1907,Real,0.9998148083686829,Real,0.9969964027404785,Real,1.0,True,True
+74,*cough cough* racist,spicy._.trash,95,840,0,Bot,0.9976580142974854,Bot,0.9944573640823364,Scam,1.0,True,False
+75,Yea. Bc u ruined it,ivyjosephinee,157,315,77,Real,0.6089593172073364,Bot,0.9925903081893921,Scam,1.0,False,False
+76,shut up,wifey.is.myself.lol,50,75,52,Real,0.6916735768318176,Bot,0.9940783977508545,Scam,1.0,False,False
+77,Youre such an idiot,belnobelle,1434,330,41,Spam,0.7893175482749939,Real,0.8720970153808594,Scam,1.0,False,False
+78,That’s quite racist,nawafxxmax1230,11,36,5,Scam,0.7796943187713623,Bot,0.9948220252990723,Scam,1.0,False,True
+79,Now everyone hates you including me,molli_harrell74,831,269,38,Spam,0.7474594116210938,Bot,0.7620416879653931,Scam,1.0,False,False
+80,Just showing how obnoxious and stupid you’re being such a role model to rest of the Americans. Smh,wildheartdori,381,1175,408,Real,0.9934543371200562,Real,0.9971134662628174,Real,0.6666666666666666,True,True
+116,Obsessed with you,melissaarrose,5370,753,42,Spam,0.9659407138824463,Real,0.5303149223327637,Spam,0.6666666666666666,False,True
+137,Lucky you,annhernandez5701,170,4539,34,Bot,0.5132091641426086,Bot,0.9966312050819397,Bot,1.0,True,True
+141,Cuteness overload,derycksally,59,184,113,Real,0.7407381534576416,Bot,0.9929290413856506,Spam,0.7777777777777778,False,False

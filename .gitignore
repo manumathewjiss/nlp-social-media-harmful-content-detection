@@ -1,6 +1,6 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
-*.py[codz]
+*.py[cod]
 *$py.class
 
 # C extensions
@@ -137,6 +137,7 @@ celerybeat.pid
 # Environments
 .env
 .envrc
+.env.local
 .venv
 env/
 venv/
@@ -205,3 +206,26 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Model cache (large files)
+model_cache/
+
+# Large BERT model weights (>100 MB – too big for GitHub)
+*.safetensors
+*.pt
+task3_limfaad/outputs/bert_checkpoints/
+
+# Reference PDFs (not source code)
+*.pdf
+
+# Large phase-1 output CSVs
+outputs/phase1_sentiment_results_*.csv
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~

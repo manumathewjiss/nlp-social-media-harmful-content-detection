@@ -1,0 +1,28 @@
+================================================================================
+TASK 4: XGBoost vs BERT vs KNN – Account classification comparison
+================================================================================
+
+Input: task2_roberta/instagram_roberta_negative_comments.csv
+Total accounts: 55
+
+XGBoost distribution:
+  Bot: 6 (10.9%)
+  Real: 30 (54.5%)
+  Scam: 4 (7.3%)
+  Spam: 15 (27.3%)
+
+BERT distribution:
+  Bot: 30 (54.5%)
+  Real: 23 (41.8%)
+  Scam: 1 (1.8%)
+  Spam: 1 (1.8%)
+
+KNN distribution:
+  Bot: 4 (7.3%)
+  Real: 12 (21.8%)
+  Scam: 18 (32.7%)
+  Spam: 21 (38.2%)
+
+XGBoost–BERT agreement: 41.82%
+XGBoost–KNN agreement : 40.00%
+BERT–KNN agreement    : 27.27%

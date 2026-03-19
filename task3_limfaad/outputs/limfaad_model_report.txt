@@ -1,0 +1,76 @@
+================================================================================
+LIMFAAD MODEL EVALUATION REPORT
+================================================================================
+
+Model: XGBoost Classifier
+Training Date: 2026-01-26 21:00:28
+Dataset: LIMFADD.csv
+Training Samples: 12000
+Test Samples: 3000
+
+================================================================================
+MODEL CONFIGURATION
+================================================================================
+objective: multi:softprob
+num_class: 4
+eval_metric: mlogloss
+max_depth: 6
+learning_rate: 0.1
+n_estimators: 200
+subsample: 0.8
+colsample_bytree: 0.8
+random_state: 42
+n_jobs: -1
+
+================================================================================
+PERFORMANCE METRICS
+================================================================================
+
+Training Accuracy: 0.9969 (99.69%)
+Test Accuracy: 0.9690 (96.90%)
+
+Per-Class Metrics:
+Class        Precision    Recall       F1-Score     Support   
+------------------------------------------------------------
+Bot          0.9960       0.9853       0.9906       750       
+Real         0.9515       0.9413       0.9464       750       
+Scam         0.9855       0.9973       0.9914       750       
+Spam         0.9432       0.9520       0.9476       750       
+
+Overall Metrics:
+Macro Precision: 0.9690
+Macro Recall: 0.9690
+Macro F1-Score: 0.9690
+Weighted Precision: 0.9690
+Weighted Recall: 0.9690
+Weighted F1-Score: 0.9690
+
+================================================================================
+CLASSIFICATION REPORT
+================================================================================
+
+              precision    recall  f1-score   support
+
+         Bot       1.00      0.99      0.99       750
+        Real       0.95      0.94      0.95       750
+        Scam       0.99      1.00      0.99       750
+        Spam       0.94      0.95      0.95       750
+
+    accuracy                           0.97      3000
+   macro avg       0.97      0.97      0.97      3000
+weighted avg       0.97      0.97      0.97      3000
+
+================================================================================
+FEATURE IMPORTANCE
+================================================================================
+
+Followers                 0.3792
+Posts                     0.3040
+Following                 0.1031
+Mutual Friends            0.0694
+Following/Followers       0.0549
+Posts/Followers           0.0426
+Bio                       0.0292
+External Link             0.0069
+Threads                   0.0060
+Profile Picture           0.0048
