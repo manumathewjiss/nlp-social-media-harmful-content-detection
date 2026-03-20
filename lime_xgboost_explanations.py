@@ -1,16 +1,15 @@
 """
-LIME (Local Interpretable Model-Agnostic Explanations) for the Neural Network account classifier.
+LIME (Local Interpretable Model-Agnostic Explanations) for the XGBoost account classifier.
 
-Loads the trained MLP Neural Network model, selects one correctly-classified example per class
+Loads the trained XGBoost model, selects one correctly-classified example per class
 (Bot, Real, Scam, Spam), applies LimeTabularExplainer, and produces:
 
-  task3_limfaad/outputs/lime/lime_bert_word_importance.png   ← main paper figure (2×2)
-  task3_limfaad/outputs/lime/lime_nn_<class>_individual.png  ← per-class figures
-  task3_limfaad/outputs/lime/lime_nn_weights_summary.csv     ← all feature weights
+  task3_limfaad/outputs/lime/lime_bert_word_importance.png   ← main 2×2 figure (replaces old)
+  task3_limfaad/outputs/lime/lime_xgb_<class>_individual.png ← per-class figures
+  task3_limfaad/outputs/lime/lime_xgb_weights_summary.csv    ← all feature weights
 
 Run:
-    pip install lime          (once)
-    python lime_bert_explanations.py
+    python lime_xgboost_explanations.py
 """
 
 import os
@@ -18,12 +17,11 @@ import pickle
 import warnings
 import numpy as np
 import pandas as pd
-import torch
-import torch.nn as nn
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
+import xgboost as xgb
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from lime.lime_tabular import LimeTabularExplainer
@@ -31,12 +29,11 @@ from lime.lime_tabular import LimeTabularExplainer
 warnings.filterwarnings("ignore")
 
 # ---------------------------------------------------------------------------
-# Config – must match train_limfaad_nn.py exactly
+# Config – must match train_limfaad_model.py exactly
 # ---------------------------------------------------------------------------
-NN_MODEL_PATH    = "task3_limfaad/models/limfaad_nn_model.pt"
-SCALER_PATH      = "task3_limfaad/models/limfaad_nn_scaler.pkl"
-FEATURE_INFO_PATH= "task3_limfaad/models/limfaad_nn_feature_info.pkl"
-LABEL_ENC_PATH   = "task3_limfaad/models/limfaad_nn_label_encoder.pkl"
+XGB_MODEL_PATH   = "task3_limfaad/models/limfaad_xgboost_model.json"
+LABEL_ENC_PATH   = "task3_limfaad/models/limfaad_label_encoder.pkl"
+FEATURE_INFO_PATH= "task3_limfaad/models/limfaad_feature_info.pkl"
 LIME_OUTPUT_DIR  = "task3_limfaad/outputs/lime"
 INPUT_FILE       = "LIMFADD.csv"
 TEST_SIZE        = 0.2
@@ -51,73 +48,31 @@ FEATURE_COLUMNS = [
 
 CLASS_NAMES = ['Bot', 'Real', 'Scam', 'Spam']
 
+CLASS_COLORS = {
+    "Bot":  "#E74C3C",
+    "Real": "#2ECC71",
+    "Scam": "#E67E22",
+    "Spam": "#9B59B6",
+}
+
 os.makedirs(LIME_OUTPUT_DIR, exist_ok=True)
 
-
 # ---------------------------------------------------------------------------
-# Device
+# Load XGBoost model
 # ---------------------------------------------------------------------------
-def get_device():
-    if torch.cuda.is_available():
-        return torch.device("cuda")
-    try:
-        if torch.backends.mps.is_available():
-            return torch.device("mps")
-    except Exception:
-        pass
-    return torch.device("cpu")
+print("Loading XGBoost model …")
+xgb_model = xgb.XGBClassifier()
+xgb_model.load_model(XGB_MODEL_PATH)
 
-DEVICE = get_device()
-print(f"Using device: {DEVICE}")
+with open(LABEL_ENC_PATH, 'rb') as f:
+    label_encoder = pickle.load(f)
 
-
-# ---------------------------------------------------------------------------
-# MLP Architecture (must match train_limfaad_nn.py)
-# ---------------------------------------------------------------------------
-class AccountClassifierMLP(nn.Module):
-    def __init__(self, input_size, hidden_sizes, num_classes, dropout_rate=0.3):
-        super().__init__()
-        layers = []
-        prev_size = input_size
-        for hidden_size in hidden_sizes:
-            layers.extend([
-                nn.Linear(prev_size, hidden_size),
-                nn.BatchNorm1d(hidden_size),
-                nn.ReLU(),
-                nn.Dropout(dropout_rate),
-            ])
-            prev_size = hidden_size
-        layers.append(nn.Linear(prev_size, num_classes))
-        self.network = nn.Sequential(*layers)
-
-    def forward(self, x):
-        return self.network(x)
-
-
-# ---------------------------------------------------------------------------
-# Load NN model
-# ---------------------------------------------------------------------------
-print("Loading Neural Network model …")
-checkpoint = torch.load(NN_MODEL_PATH, map_location=DEVICE)
-model_config = checkpoint['model_config']
-
-nn_model = AccountClassifierMLP(
-    input_size=model_config['input_size'],
-    hidden_sizes=model_config['hidden_sizes'],
-    num_classes=model_config['num_classes'],
-    dropout_rate=model_config['dropout_rate'],
-)
-nn_model.load_state_dict(checkpoint['model_state_dict'])
-nn_model.eval()
-nn_model.to(DEVICE)
+print(f"Classes: {label_encoder.classes_}")
 print("Model loaded.")
 
-with open(SCALER_PATH, 'rb') as f:
-    scaler = pickle.load(f)
-
 
 # ---------------------------------------------------------------------------
-# Preprocessing (same as train_limfaad_nn.py)
+# Preprocessing (same as train_limfaad_model.py)
 # ---------------------------------------------------------------------------
 def load_and_preprocess_limfaad(csv_path: str):
     df = pd.read_csv(csv_path)
@@ -154,20 +109,15 @@ def load_and_preprocess_limfaad(csv_path: str):
 
 
 # ---------------------------------------------------------------------------
-# NN predict function for LIME
+# XGBoost predict function for LIME
 # ---------------------------------------------------------------------------
-def nn_predict_proba(X_raw: np.ndarray) -> np.ndarray:
-    """Accepts raw (unscaled) feature matrix, returns softmax probabilities."""
-    X_scaled = scaler.transform(X_raw)
-    X_t = torch.tensor(X_scaled, dtype=torch.float32).to(DEVICE)
-    with torch.no_grad():
-        logits = nn_model(X_t)
-        probs = torch.softmax(logits, dim=1).cpu().numpy()
-    return probs
+def xgb_predict_proba(X_raw: np.ndarray) -> np.ndarray:
+    """Returns (N, 4) softmax probability array."""
+    return xgb_model.predict_proba(X_raw)
 
 
 # ---------------------------------------------------------------------------
-# Build test set (same split as training)
+# Load and split data
 # ---------------------------------------------------------------------------
 print("Loading and preprocessing LIMFAAD …")
 X, y, le = load_and_preprocess_limfaad(INPUT_FILE)
@@ -177,10 +127,10 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 
 # ---------------------------------------------------------------------------
-# Select one correctly-classified example per class
+# Select one correctly-classified example per class (highest confidence)
 # ---------------------------------------------------------------------------
 print("Selecting representative examples …")
-probs_all = nn_predict_proba(X_test)
+probs_all = xgb_predict_proba(X_test)
 y_pred    = np.argmax(probs_all, axis=1)
 conf_all  = np.max(probs_all, axis=1)
 
@@ -204,7 +154,7 @@ for cls_idx in range(len(CLASS_NAMES)):
 
 
 # ---------------------------------------------------------------------------
-# Run LIME (tabular)
+# Run LIME
 # ---------------------------------------------------------------------------
 explainer = LimeTabularExplainer(
     training_data=X_train,
@@ -225,7 +175,7 @@ for cls_idx, info in selected.items():
 
     exp = explainer.explain_instance(
         info["X_row"],
-        nn_predict_proba,
+        xgb_predict_proba,
         labels=[pred_idx],
         num_features=TOP_N_FEATURES,
         num_samples=N_LIME_SAMPLES,
@@ -234,34 +184,27 @@ for cls_idx, info in selected.items():
 
     for feat, weight in exp.as_list(label=pred_idx):
         all_weights.append({
-            "class":       cls_name,
-            "feature":     feat,
-            "weight":      weight,
-            "true_label":  info["true_label"],
-            "pred_label":  info["pred_label"],
-            "confidence":  info["confidence"],
+            "class":      cls_name,
+            "feature":    feat,
+            "weight":     weight,
+            "true_label": info["true_label"],
+            "pred_label": info["pred_label"],
+            "confidence": info["confidence"],
         })
 
 # Save CSV summary
 weights_df = pd.DataFrame(all_weights)
-csv_path   = os.path.join(LIME_OUTPUT_DIR, "lime_nn_weights_summary.csv")
+csv_path   = os.path.join(LIME_OUTPUT_DIR, "lime_xgb_weights_summary.csv")
 weights_df.to_csv(csv_path, index=False)
 print(f"\nWeights CSV saved → {csv_path}")
 
 
 # ---------------------------------------------------------------------------
-# Combined 2×2 figure for paper
+# Combined 2×2 figure (replaces lime_bert_word_importance.png)
 # ---------------------------------------------------------------------------
-CLASS_COLORS = {
-    "Bot":  "#E74C3C",
-    "Real": "#2ECC71",
-    "Scam": "#E67E22",
-    "Spam": "#9B59B6",
-}
-
 fig, axes = plt.subplots(2, 2, figsize=(16, 13))
 fig.suptitle(
-    "LIME Explanations – Neural Network Account Classifier (LIMFAAD)\n"
+    "LIME Explanations – XGBoost Account Classifier (LIMFAAD)\n"
     "Positive weights (green) support the predicted class; "
     "negative weights (red) oppose it.",
     fontsize=13, fontweight='bold', y=1.01
@@ -274,7 +217,7 @@ for ax, (cls_idx, info) in zip(axes.flatten(), selected.items()):
 
     raw = exp.as_list(label=pred_idx)
     raw_sorted = sorted(raw, key=lambda x: abs(x[1]), reverse=True)[:TOP_N_FEATURES]
-    raw_sorted = sorted(raw_sorted, key=lambda x: x[1])
+    raw_sorted = sorted(raw_sorted, key=lambda x: x[1])   # ascending for horizontal bar
 
     feats   = [r[0] for r in raw_sorted]
     weights = [r[1] for r in raw_sorted]
@@ -302,6 +245,7 @@ for ax, (cls_idx, info) in zip(axes.flatten(), selected.items()):
     ax.spines["top"].set_visible(False)
     ax.spines["right"].set_visible(False)
 
+    # Class badge
     ax.text(
         0.98, 0.02, cls_name,
         transform=ax.transAxes,
@@ -354,7 +298,7 @@ for cls_idx, info in selected.items():
 
     match_str = "Correct" if info["true_label"] == info["pred_label"] else "Mismatch"
     ax_s.set_title(
-        f"LIME – Neural Network Account Classifier\n"
+        f"LIME – XGBoost Account Classifier\n"
         f"Predicted: {info['pred_label']}  |  True: {info['true_label']}  "
         f"|  {match_str}  |  Confidence: {info['confidence']:.1%}",
         fontsize=11, fontweight="bold"
@@ -368,7 +312,7 @@ for cls_idx, info in selected.items():
     neg_p = mpatches.Patch(color="#e74c3c", label="Opposes prediction")
     ax_s.legend(handles=[pos_p, neg_p], fontsize=9, loc="lower right")
 
-    indiv_path = os.path.join(LIME_OUTPUT_DIR, f"lime_nn_{cls_name.lower()}_individual.png")
+    indiv_path = os.path.join(LIME_OUTPUT_DIR, f"lime_xgb_{cls_name.lower()}_individual.png")
     plt.tight_layout()
     plt.savefig(indiv_path, dpi=150, bbox_inches="tight")
     plt.close()

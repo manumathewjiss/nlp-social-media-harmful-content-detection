@@ -1,7 +1,7 @@
 """
-Generate a metrics visualization for the BERT model that matches the style
+Generate a metrics visualization for the Neural Network model that matches the style
 of the XGBoost limfaad_metrics_visualization.png.
-Reads from limfaad_bert_model_report.txt.
+Reads from limfaad_nn_model_report.txt.
 """
 
 import re
@@ -13,9 +13,9 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
 
 # ---------------------------------------------------------------------------
-# Parse BERT report
+# Parse Neural Network report
 # ---------------------------------------------------------------------------
-REPORT_PATH = "task3_limfaad/outputs/limfaad_bert_model_report.txt"
+REPORT_PATH = "task3_limfaad/outputs/limfaad_nn_model_report.txt"
 OUTPUT_PATH = "task3_limfaad/outputs/limfaad_bert_metrics_visualization.png"
 
 report_text = open(REPORT_PATH).read()
@@ -48,7 +48,7 @@ macro_recall = float(m_avg.group(2)) * 100
 # ---------------------------------------------------------------------------
 fig, axes = plt.subplots(2, 2, figsize=(14, 10))
 fig.suptitle(
-    "LIMFAAD BERT Model – Comprehensive Performance Metrics\n"
+    "LIMFAAD Neural Network Model – Comprehensive Performance Metrics\n"
     "Bot / Scam / Real / Spam Classification",
     fontsize=14, fontweight='bold'
 )

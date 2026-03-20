@@ -1,0 +1,41 @@
+class,feature,weight,true_label,pred_label,confidence
+Bot,Posts,-0.16519738452851773,Bot,Bot,1.0
+Bot,Following,0.16288450102651314,Bot,Bot,1.0
+Bot,Followers,-0.10620246642351243,Bot,Bot,1.0
+Bot,Bio,-0.07848288021308104,Bot,Bot,1.0
+Bot,Threads,-0.0699412454832649,Bot,Bot,1.0
+Bot,Mutual Friends,-0.06582622407032826,Bot,Bot,1.0
+Bot,External Link,-0.053222999883584365,Bot,Bot,1.0
+Bot,Posts/Followers,0.011563885160216444,Bot,Bot,1.0
+Bot,Following/Followers,-0.008660476714367524,Bot,Bot,1.0
+Bot,Profile Picture,-0.0010959451585103072,Bot,Bot,1.0
+Real,Posts,0.2202871928420854,Real,Real,1.0
+Real,Followers,-0.21024037646807464,Real,Real,1.0
+Real,Following/Followers,0.12853758756668388,Real,Real,1.0
+Real,Following,0.128006374935725,Real,Real,1.0
+Real,Bio,0.057605996311241324,Real,Real,1.0
+Real,Posts/Followers,0.041112676860444536,Real,Real,1.0
+Real,Mutual Friends,0.03893831921510049,Real,Real,1.0
+Real,Threads,0.028463914650515156,Real,Real,1.0
+Real,External Link,0.010235128779064358,Real,Real,1.0
+Real,Profile Picture,-0.0027163576632893314,Real,Real,1.0
+Scam,Following,-0.1257288604492652,Scam,Scam,0.9999982118606567
+Scam,Following/Followers,0.08028647979803401,Scam,Scam,0.9999982118606567
+Scam,Followers,-0.07911040783465176,Scam,Scam,0.9999982118606567
+Scam,Posts,-0.05242865050483714,Scam,Scam,0.9999982118606567
+Scam,Threads,-0.047102783529885714,Scam,Scam,0.9999982118606567
+Scam,Mutual Friends,-0.035015838967522105,Scam,Scam,0.9999982118606567
+Scam,Posts/Followers,-0.024163585454937568,Scam,Scam,0.9999982118606567
+Scam,External Link,-0.011297751727374832,Scam,Scam,0.9999982118606567
+Scam,Profile Picture,0.006709199531808553,Scam,Scam,0.9999982118606567
+Scam,Bio,0.0009248008714195272,Scam,Scam,0.9999982118606567
+Spam,Followers,0.24789895132747453,Spam,Spam,1.0
+Spam,Following/Followers,0.13778146463029745,Spam,Spam,1.0
+Spam,Following,-0.11905633348904224,Spam,Spam,1.0
+Spam,Posts,-0.08219555654116945,Spam,Spam,1.0
+Spam,External Link,-0.039433211618412234,Spam,Spam,1.0
+Spam,Posts/Followers,0.02399261334797422,Spam,Spam,1.0
+Spam,Mutual Friends,0.013852443742767584,Spam,Spam,1.0
+Spam,Profile Picture,-0.006873978397401762,Spam,Spam,1.0
+Spam,Bio,0.006276595217842113,Spam,Spam,1.0
+Spam,Threads,-0.0025512080985237427,Spam,Spam,1.0

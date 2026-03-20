@@ -1,0 +1,36 @@
+================================================================================
+LIMFAAD NEURAL NETWORK MODEL EVALUATION REPORT
+================================================================================
+
+Model: Multi-Layer Perceptron (MLP) Neural Network
+Architecture: 10 → 256 → 128 → 64 → 4
+Training Date: 2026-03-19 15:41:00
+Dataset: LIMFADD.csv
+Training Samples: 12000
+Test Samples: 3000
+
+================================================================================
+PERFORMANCE METRICS
+================================================================================
+
+Training Accuracy: 0.9784 (97.84%)
+Test Accuracy: 0.9680 (96.80%)
+
+Macro Precision: 0.9683
+Macro Recall: 0.9680
+Macro F1: 0.9680
+
+================================================================================
+CLASSIFICATION REPORT
+================================================================================
+
+              precision    recall  f1-score   support
+
+         Bot       1.00      0.97      0.99       750
+        Real       0.96      0.94      0.95       750
+        Scam       0.97      1.00      0.99       750
+        Spam       0.94      0.96      0.95       750
+
+    accuracy                           0.97      3000
+   macro avg       0.97      0.97      0.97      3000
+weighted avg       0.97      0.97      0.97      3000

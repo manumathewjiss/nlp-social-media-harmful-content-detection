@@ -1,12 +1,12 @@
 """
-Compare XGBoost vs BERT vs KNN on the LIMFAAD task (same test set).
+Compare XGBoost vs Neural Network vs KNN on the LIMFAAD task (same test set).
 Reads saved metrics CSVs from task3_limfaad/outputs and produces:
   - Console table
   - Combined bar chart (task3_limfaad/outputs/limfaad_model_comparison.png)
   - Side-by-side confusion matrices (limfaad_model_comparison_confusion_matrices.png)
-  - Text report (limfaad_xgboost_vs_bert_vs_knn_comparison.txt)
+  - Text report (limfaad_xgboost_vs_nn_vs_knn_comparison.txt)
 
-Run after: train_limfaad_model.py, train_limfaad_bert.py, train_limfaad_knn.py
+Run after: train_limfaad_model.py, train_limfaad_nn.py, train_limfaad_knn.py
 """
 
 import os
@@ -23,13 +23,13 @@ OUTPUT_DIR = "task3_limfaad/outputs"
 MODELS_DIR = "task3_limfaad/models"
 
 METRICS_FILES = {
-    'XGBoost': 'limfaad_training_metrics.csv',
-    'BERT':    'limfaad_bert_training_metrics.csv',
-    'KNN':     'limfaad_knn_training_metrics.csv',
+    'XGBoost':        'limfaad_training_metrics.csv',
+    'Neural Network': 'limfaad_nn_training_metrics.csv',
+    'KNN':            'limfaad_knn_training_metrics.csv',
 }
 
-COLORS = {'XGBoost': '#3498db', 'BERT': '#e74c3c', 'KNN': '#2ecc71'}
-REPORT_FILE = os.path.join(OUTPUT_DIR, 'limfaad_xgboost_vs_bert_vs_knn_comparison.txt')
+COLORS = {'XGBoost': '#3498db', 'Neural Network': '#e74c3c', 'KNN': '#2ecc71'}
+REPORT_FILE = os.path.join(OUTPUT_DIR, 'limfaad_xgboost_vs_nn_vs_knn_comparison.txt')
 CHART_FILE = os.path.join(OUTPUT_DIR, 'limfaad_model_comparison.png')
 CM_FILE = os.path.join(OUTPUT_DIR, 'limfaad_model_comparison_confusion_matrices.png')
 
@@ -52,16 +52,16 @@ def load_confusion_matrices():
     class_names = None
 
     val_files = {
-        'XGBoost': 'limfaad_model_validation_results.csv',
-        'BERT':    'limfaad_bert_validation_results.csv',
-        'KNN':     'limfaad_knn_validation_results.csv',
+        'XGBoost':        'limfaad_model_validation_results.csv',
+        'Neural Network': 'limfaad_nn_validation_results.csv',
+        'KNN':            'limfaad_knn_validation_results.csv',
     }
 
     # Label encoder for class names
     enc_candidates = [
         os.path.join(MODELS_DIR, 'limfaad_label_encoder.pkl'),
         os.path.join(MODELS_DIR, 'limfaad_knn_label_encoder.pkl'),
-        os.path.join(MODELS_DIR, 'limfaad_bert_label_encoder.pkl'),
+        os.path.join(MODELS_DIR, 'limfaad_nn_label_encoder.pkl'),
     ]
     for p in enc_candidates:
         if os.path.exists(p):
@@ -88,7 +88,7 @@ def load_confusion_matrices():
 def main():
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     print("=" * 70)
-    print("LIMFAAD: XGBoost vs BERT vs KNN comparison")
+    print("LIMFAAD: XGBoost vs Neural Network vs KNN comparison")
     print("=" * 70)
 
     # ── 1. Load metrics ────────────────────────────────────────────────────
@@ -110,7 +110,7 @@ def main():
 
     header = f"{'Metric':<25}" + "".join(f"{m:<{col_w}}" for m in models)
     separator = "-" * (25 + col_w * len(models))
-    lines = ["=" * 70, "LIMFAAD: XGBoost vs BERT vs KNN (same train/test split)", "=" * 70,
+    lines = ["=" * 70, "LIMFAAD: XGBoost vs Neural Network vs KNN (same train/test split)", "=" * 70,
              "", header, separator]
 
     for key, label in metrics_to_show:
@@ -154,7 +154,7 @@ def main():
     ax.set_xticklabels(plot_labels, fontsize=10)
     ax.set_ylim(0, 1.12)
     ax.set_ylabel('Score', fontsize=12)
-    ax.set_title('LIMFAAD Account Classification – XGBoost vs BERT vs KNN', fontsize=13, fontweight='bold')
+    ax.set_title('LIMFAAD Account Classification – XGBoost vs Neural Network vs KNN', fontsize=13, fontweight='bold')
     ax.legend(fontsize=11)
     ax.grid(axis='y', linestyle='--', alpha=0.4)
     plt.tight_layout()
@@ -173,14 +173,14 @@ def main():
             acc = np.trace(cm) / cm.sum()
             sns.heatmap(
                 cm, annot=True, fmt='d',
-                cmap='Blues' if name == 'XGBoost' else 'Oranges' if name == 'BERT' else 'Greens',
+                cmap='Blues' if name == 'XGBoost' else 'Oranges' if name == 'Neural Network' else 'Greens',
                 xticklabels=class_names, yticklabels=class_names,
                 cbar_kws={'label': 'Count'}, ax=ax,
             )
             ax.set_title(f'{name}  (acc={acc:.3f})', fontsize=12, fontweight='bold')
             ax.set_xlabel('Predicted')
             ax.set_ylabel('True')
-        plt.suptitle('LIMFAAD – Confusion Matrices', fontsize=14, fontweight='bold', y=1.02)
+        plt.suptitle('LIMFAAD – Confusion Matrices', fontsize=14, fontweight='bold', y=1.01)
         plt.tight_layout()
         plt.savefig(CM_FILE, dpi=150, bbox_inches='tight')
         plt.close()

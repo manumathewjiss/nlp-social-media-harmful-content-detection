@@ -1,5 +1,6 @@
 """
-Generates Neural Network-specific figures for the Instagram negative-comment accounts:
+Generates XGBoost-specific figures for the Instagram negative-comment accounts,
+replacing the existing files at their original paths:
   1. task4_classification/instagram_bert_category_distribution.png
   2. task4_classification/instagram_bert_confidence_distribution.png
 """
@@ -11,22 +12,22 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
 
-CSV_PATH  = "task4_classification/instagram_negative_xgboost_vs_bert_vs_knn_results.csv"
-OUT_DIR   = "task4_classification"
+CSV_PATH = "task4_classification/instagram_negative_xgboost_vs_bert_vs_knn_results.csv"
+OUT_DIR  = "task4_classification"
 
 # ---------------------------------------------------------------------------
-# Load Neural Network predictions
+# Load XGBoost predictions
 # ---------------------------------------------------------------------------
 rows = []
 with open(CSV_PATH) as f:
     for row in csv.DictReader(f):
         rows.append(row)
 
-labels      = [r['Predicted_Label_NN'] for r in rows]
-confidences = [float(r['Confidence_NN']) for r in rows]
+labels      = [r['Predicted_Label_XGBoost'] for r in rows]
+confidences = [float(r['Confidence_XGBoost']) for r in rows]
 
 from collections import Counter
-counts = Counter(labels)
+counts      = Counter(labels)
 classes     = ['Bot', 'Real', 'Scam', 'Spam']
 class_counts = [counts.get(c, 0) for c in classes]
 total        = sum(class_counts)
@@ -37,8 +38,10 @@ total        = sum(class_counts)
 colors = ['#3498db', '#e74c3c', '#2ecc71', '#f39c12']
 
 fig, ax = plt.subplots(figsize=(9, 6))
-bars = ax.bar(classes, class_counts, color=colors, edgecolor='black', linewidth=0.7, width=0.55)
-ax.set_title('Negative Comments – Account Classification Distribution\n(Neural Network Model)', fontsize=13, fontweight='bold')
+bars = ax.bar(classes, class_counts, color=colors,
+              edgecolor='black', linewidth=0.7, width=0.55)
+ax.set_title('Negative Comments – Account Classification Distribution\n(XGBoost Model)',
+             fontsize=13, fontweight='bold')
 ax.set_xlabel('Predicted Class', fontsize=11)
 ax.set_ylabel('Count', fontsize=11)
 ax.set_ylim(0, max(class_counts) * 1.18)
@@ -64,11 +67,12 @@ print(f"Saved → {cat_path}")
 mean_conf = sum(confidences) / len(confidences)
 
 fig, ax = plt.subplots(figsize=(9, 6))
-n, bins, patches = ax.hist(confidences, bins=20, color='#3498db',
-                           edgecolor='white', linewidth=0.6, alpha=0.85)
+ax.hist(confidences, bins=20, color='#3498db',
+        edgecolor='white', linewidth=0.6, alpha=0.85)
 ax.axvline(mean_conf, color='red', linestyle='--', linewidth=1.8,
            label=f'Mean: {mean_conf:.3f}')
-ax.set_title('Negative Comments – Confidence Distribution\n(Neural Network Model)', fontsize=13, fontweight='bold')
+ax.set_title('Negative Comments – Confidence Distribution\n(XGBoost Model)',
+             fontsize=13, fontweight='bold')
 ax.set_xlabel('Confidence (Max Class Probability)', fontsize=11)
 ax.set_ylabel('Frequency', fontsize=11)
 ax.legend(fontsize=10)
@@ -84,7 +88,8 @@ print(f"Saved → {conf_path}")
 # ---------------------------------------------------------------------------
 # Summary
 # ---------------------------------------------------------------------------
-print("\nNeural Network Instagram Predictions:")
+print("\nXGBoost Instagram Predictions:")
 for cls, cnt in zip(classes, class_counts):
     print(f"  {cls}: {cnt} ({cnt/total*100:.1f}%)")
-print(f"\nConfidence — Mean: {mean_conf:.4f}  Min: {min(confidences):.4f}  Max: {max(confidences):.4f}")
+print(f"\nConfidence — Mean: {mean_conf:.4f}  "
+      f"Min: {min(confidences):.4f}  Max: {max(confidences):.4f}")

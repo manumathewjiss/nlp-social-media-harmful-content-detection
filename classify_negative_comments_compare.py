@@ -1,6 +1,6 @@
 """
-Task 4 (Comparison): Classify negative-comment accounts with both XGBoost and BERT.
-Uses LIMFAAD-trained XGBoost and LIMFAAD-trained BERT on the same Instagram
+Task 4 (Comparison): Classify negative-comment accounts with XGBoost, Neural Network, and KNN.
+Uses LIMFAAD-trained XGBoost and LIMFAAD-trained MLP Neural Network on the same Instagram
 negative-comment profiles and outputs a side-by-side comparison.
 """
 
@@ -12,39 +12,64 @@ from datetime import datetime
 import warnings
 warnings.filterwarnings('ignore')
 
-import xgboost as xgb
 import torch
-from torch.utils.data import Dataset
-from transformers import BertTokenizer, BertForSequenceClassification
-from tqdm import tqdm
-
-from limfaad_bert_utils import FEATURE_COLUMNS, row_to_text
-
-# Optional: matplotlib for plots
-try:
-    import matplotlib
-    matplotlib.use('Agg')
-    import matplotlib.pyplot as plt
-    import seaborn as sns
-    HAS_MPL = True
-except Exception:
-    HAS_MPL = False
+import torch.nn as nn
+import xgboost as xgb
 
 from sklearn.metrics import (
     accuracy_score, precision_recall_fscore_support,
     confusion_matrix, classification_report,
 )
 
+# Optional: matplotlib for plots
+try:
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+    HAS_MPL = True
+except Exception:
+    HAS_MPL = False
+
 CONFIG = {
     'input_file': 'task2_roberta/instagram_roberta_negative_comments.csv',
     'output_dir': 'task4_classification',
     'models_dir': 'task3_limfaad/models',
-    'bert_model_dir': 'task3_limfaad/models/limfaad_bert',
-    'max_length': 128,
-    'bert_batch_size': 8,
 }
 
-# Apple Silicon MPS or CUDA or CPU
+FEATURE_COLUMNS = [
+    'Followers', 'Following', 'Following/Followers', 'Posts', 'Posts/Followers',
+    'Bio', 'Profile Picture', 'External Link', 'Mutual Friends', 'Threads'
+]
+
+
+def build_nn_model(mc):
+    """Build AccountClassifierMLP from saved model config dict."""
+    class AccountClassifierMLP(nn.Module):
+        def __init__(self, input_size, hidden_sizes, num_classes, dropout_rate=0.3):
+            super().__init__()
+            layers = []
+            prev_size = input_size
+            for hidden_size in hidden_sizes:
+                layers.extend([
+                    nn.Linear(prev_size, hidden_size),
+                    nn.BatchNorm1d(hidden_size),
+                    nn.ReLU(),
+                    nn.Dropout(dropout_rate),
+                ])
+                prev_size = hidden_size
+            layers.append(nn.Linear(prev_size, num_classes))
+            self.network = nn.Sequential(*layers)
+
+        def forward(self, x):
+            return self.network(x)
+
+    return AccountClassifierMLP(
+        input_size=mc['input_size'],
+        hidden_sizes=mc['hidden_sizes'],
+        num_classes=mc['num_classes'],
+        dropout_rate=mc['dropout_rate'],
+    )
+
 def get_device():
     if torch.cuda.is_available():
         return torch.device('cuda')
@@ -54,6 +79,7 @@ def get_device():
     except Exception:
         pass
     return torch.device('cpu')
+
 os.makedirs(CONFIG['output_dir'], exist_ok=True)
 
 
@@ -87,32 +113,9 @@ def parse_mutual_friends(x):
         return 0
 
 
-class TextInferenceDataset(Dataset):
-    def __init__(self, texts, tokenizer, max_length):
-        self.texts = texts
-        self.tokenizer = tokenizer
-        self.max_length = max_length
-
-    def __len__(self):
-        return len(self.texts)
-
-    def __getitem__(self, idx):
-        enc = self.tokenizer(
-            self.texts[idx],
-            max_length=self.max_length,
-            padding='max_length',
-            truncation=True,
-            return_tensors='pt',
-        )
-        return {
-            'input_ids': enc['input_ids'].squeeze(0),
-            'attention_mask': enc['attention_mask'].squeeze(0),
-        }
-
-
 def main():
     print("=" * 80)
-    print("TASK 4 (COMPARE): XGBoost vs BERT on negative-comment accounts")
+    print("TASK 4 (COMPARE): XGBoost vs Neural Network vs KNN on negative-comment accounts")
     print("=" * 80)
     print(f"Started: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("=" * 80)
@@ -129,7 +132,7 @@ def main():
         valid = df['Labels'].isin(['Bot', 'Scam', 'Real', 'Spam'])
         has_labels = valid.sum() == len(df)
     if has_labels:
-        print("Ground-truth 'Labels' found. Will compute metrics for both models.")
+        print("Ground-truth 'Labels' found. Will compute metrics for all models.")
     else:
         print("No ground-truth Labels. Comparison will use prediction distributions and agreement.")
 
@@ -214,48 +217,52 @@ def main():
     df['Confidence_XGBoost'] = [float(np.max(p)) for p in proba_xgb]
     print(f"XGBoost predictions: {pd.Series(labels_xgb).value_counts().to_dict()}")
 
-    # ---- BERT ----
+    # ---- Neural Network ----
     print("\n" + "=" * 80)
-    print("STEP 4: BERT INFERENCE")
+    print("STEP 4: NEURAL NETWORK INFERENCE")
     print("=" * 80)
-    bert_dir = CONFIG['bert_model_dir']
-    if not os.path.exists(os.path.join(bert_dir, 'config.json')):
-        print(f"BERT model not found at {bert_dir}. Run train_limfaad_bert.py first.")
-        df['Predicted_Label_BERT'] = None
-        df['Confidence_BERT'] = np.nan
+    nn_model_path  = os.path.join(CONFIG['models_dir'], 'limfaad_nn_model.pt')
+    nn_scaler_path = os.path.join(CONFIG['models_dir'], 'limfaad_nn_scaler.pkl')
+    nn_enc_path    = os.path.join(CONFIG['models_dir'], 'limfaad_nn_label_encoder.pkl')
+    nn_info_path   = os.path.join(CONFIG['models_dir'], 'limfaad_nn_feature_info.pkl')
+
+    if not os.path.exists(nn_model_path):
+        print(f"Neural Network model not found at {nn_model_path}. Run train_limfaad_nn.py first.")
+        df['Predicted_Label_NN'] = None
+        df['Confidence_NN'] = np.nan
     else:
-        tokenizer = BertTokenizer.from_pretrained(bert_dir)
-        model_bert = BertForSequenceClassification.from_pretrained(bert_dir)
-        with open(os.path.join(CONFIG['models_dir'], 'limfaad_bert_label_encoder.pkl'), 'rb') as f:
-            label_encoder_bert = pickle.load(f)
-        model_bert.eval()
         device = get_device()
         print(f"Using device: {device}")
-        model_bert.to(device)
+        checkpoint = torch.load(nn_model_path, map_location=device)
+        mc = checkpoint['model_config']
+        nn_model = build_nn_model(mc)
+        nn_model.load_state_dict(checkpoint['model_state_dict'])
+        nn_model.eval()
+        nn_model.to(device)
 
-        texts = [row_to_text(df.loc[i]) for i in range(len(df))]
-        dataset = TextInferenceDataset(texts, tokenizer, CONFIG['max_length'])
-        loader = torch.utils.data.DataLoader(
-            dataset,
-            batch_size=CONFIG['bert_batch_size'],
-            shuffle=False,
-            num_workers=0,
-        )
-        all_logits = []
-        print(f"Running BERT inference on {len(texts)} accounts ({len(loader)} batches)...")
+        with open(nn_scaler_path, 'rb') as f:
+            nn_scaler = pickle.load(f)
+        with open(nn_enc_path, 'rb') as f:
+            label_encoder_nn = pickle.load(f)
+        with open(nn_info_path, 'rb') as f:
+            nn_info = pickle.load(f)
+        nn_features    = nn_info['feature_columns']
+        class_names_nn = np.array(nn_info['class_names'])
+
+        X_nn = df[nn_features].copy().fillna(0).values.astype(float)
+        X_nn = np.where(np.isfinite(X_nn), X_nn, 0.0)
+        X_nn_scaled = nn_scaler.transform(X_nn)
+        X_nn_scaled = np.clip(X_nn_scaled, -10.0, 10.0)
+        X_t = torch.tensor(X_nn_scaled, dtype=torch.float32).to(device)
+        print(f"Running Neural Network inference on {len(X_nn)} accounts...")
         with torch.no_grad():
-            for batch in tqdm(loader, desc="BERT inference"):
-                input_ids = batch['input_ids'].to(device)
-                attention_mask = batch['attention_mask'].to(device)
-                out = model_bert(input_ids=input_ids, attention_mask=attention_mask)
-                all_logits.append(out.logits.cpu().numpy())
-        logits = np.vstack(all_logits)
-        pred_bert = np.argmax(logits, axis=1)
-        proba_bert = torch.softmax(torch.tensor(logits, dtype=torch.float32), dim=1).numpy()
-        labels_bert = label_encoder_bert.inverse_transform(pred_bert)
-        df['Predicted_Label_BERT'] = labels_bert
-        df['Confidence_BERT'] = [float(np.max(p)) for p in proba_bert]
-        print(f"BERT predictions: {pd.Series(labels_bert).value_counts().to_dict()}")
+            logits_nn = nn_model(X_t)
+            proba_nn = torch.softmax(logits_nn, dim=1).cpu().numpy()
+        pred_nn    = np.argmax(proba_nn, axis=1)
+        labels_nn  = class_names_nn[pred_nn]
+        df['Predicted_Label_NN'] = labels_nn
+        df['Confidence_NN'] = [float(np.max(p)) for p in proba_nn]
+        print(f"Neural Network predictions: {pd.Series(labels_nn).value_counts().to_dict()}")
 
     # ---- KNN (pure NumPy — no sklearn import at runtime) ----
     print("\n" + "=" * 80)
@@ -307,19 +314,19 @@ def main():
         print(f"KNN predictions: {pd.Series(labels_knn).value_counts().to_dict()}")
 
     # ---- Agreement and comparison ----
-    bert_ready = 'Predicted_Label_BERT' in df.columns and df['Predicted_Label_BERT'].notna().all()
-    knn_ready  = 'Predicted_Label_KNN'  in df.columns and df['Predicted_Label_KNN'].notna().all()
-    if bert_ready:
-        agreement_xgb_bert = (df['Predicted_Label_XGBoost'] == df['Predicted_Label_BERT']).mean()
-        print(f"\nXGBoost–BERT agreement: {agreement_xgb_bert:.2%} ({int(agreement_xgb_bert*len(df))}/{len(df)})")
-        df['Agreement_XGB_BERT'] = df['Predicted_Label_XGBoost'] == df['Predicted_Label_BERT']
+    nn_ready  = 'Predicted_Label_NN'  in df.columns and df['Predicted_Label_NN'].notna().all()
+    knn_ready = 'Predicted_Label_KNN' in df.columns and df['Predicted_Label_KNN'].notna().all()
+    if nn_ready:
+        agreement_xgb_nn = (df['Predicted_Label_XGBoost'] == df['Predicted_Label_NN']).mean()
+        print(f"\nXGBoost–NN agreement : {agreement_xgb_nn:.2%} ({int(agreement_xgb_nn*len(df))}/{len(df)})")
+        df['Agreement_XGB_NN'] = df['Predicted_Label_XGBoost'] == df['Predicted_Label_NN']
     if knn_ready:
         agreement_xgb_knn = (df['Predicted_Label_XGBoost'] == df['Predicted_Label_KNN']).mean()
-        print(f"XGBoost–KNN agreement : {agreement_xgb_knn:.2%} ({int(agreement_xgb_knn*len(df))}/{len(df)})")
+        print(f"XGBoost–KNN agreement: {agreement_xgb_knn:.2%} ({int(agreement_xgb_knn*len(df))}/{len(df)})")
         df['Agreement_XGB_KNN'] = df['Predicted_Label_XGBoost'] == df['Predicted_Label_KNN']
-    if bert_ready and knn_ready:
-        agreement_bert_knn = (df['Predicted_Label_BERT'] == df['Predicted_Label_KNN']).mean()
-        print(f"BERT–KNN agreement    : {agreement_bert_knn:.2%} ({int(agreement_bert_knn*len(df))}/{len(df)})")
+    if nn_ready and knn_ready:
+        agreement_nn_knn = (df['Predicted_Label_NN'] == df['Predicted_Label_KNN']).mean()
+        print(f"NN–KNN agreement     : {agreement_nn_knn:.2%} ({int(agreement_nn_knn*len(df))}/{len(df)})")
 
     # ---- Metrics if labels exist ----
     if has_labels:
@@ -328,9 +335,9 @@ def main():
         print("METRICS (ground-truth Labels)")
         print("=" * 80)
         for name, pred_col in [
-            ('XGBoost', 'Predicted_Label_XGBoost'),
-            ('BERT',    'Predicted_Label_BERT'),
-            ('KNN',     'Predicted_Label_KNN'),
+            ('XGBoost',        'Predicted_Label_XGBoost'),
+            ('Neural Network', 'Predicted_Label_NN'),
+            ('KNN',            'Predicted_Label_KNN'),
         ]:
             if pred_col not in df.columns or df[pred_col].isna().any():
                 continue
@@ -350,9 +357,9 @@ def main():
         c for c in
         ['Post_ID', 'Post_Text', 'User_Name', 'Followers', 'Following', 'Posts',
          'Predicted_Label_XGBoost', 'Confidence_XGBoost',
-         'Predicted_Label_BERT',    'Confidence_BERT',
+         'Predicted_Label_NN',      'Confidence_NN',
          'Predicted_Label_KNN',     'Confidence_KNN',
-         'Agreement_XGB_BERT', 'Agreement_XGB_KNN', 'Labels']
+         'Agreement_XGB_NN', 'Agreement_XGB_KNN', 'Labels']
         if c in df.columns
     ]
     out = df[out_cols].copy()
@@ -363,14 +370,14 @@ def main():
     report_file = os.path.join(CONFIG['output_dir'], 'instagram_negative_xgboost_vs_bert_vs_knn_report.txt')
     with open(report_file, 'w') as f:
         f.write("=" * 80 + "\n")
-        f.write("TASK 4: XGBoost vs BERT vs KNN – Account classification comparison\n")
+        f.write("TASK 4: XGBoost vs Neural Network vs KNN – Account classification comparison\n")
         f.write("=" * 80 + "\n\n")
         f.write(f"Input: {CONFIG['input_file']}\n")
         f.write(f"Total accounts: {len(df)}\n\n")
         for name, col in [
-            ('XGBoost', 'Predicted_Label_XGBoost'),
-            ('BERT',    'Predicted_Label_BERT'),
-            ('KNN',     'Predicted_Label_KNN'),
+            ('XGBoost',        'Predicted_Label_XGBoost'),
+            ('Neural Network', 'Predicted_Label_NN'),
+            ('KNN',            'Predicted_Label_KNN'),
         ]:
             if col not in df.columns or df[col].isna().any():
                 continue
@@ -378,20 +385,20 @@ def main():
             for k, v in df[col].value_counts().reindex(class_names, fill_value=0).items():
                 f.write(f"  {k}: {v} ({100*v/len(df):.1f}%)\n")
             f.write("\n")
-        if bert_ready:
-            f.write(f"XGBoost–BERT agreement: {agreement_xgb_bert:.2%}\n")
+        if nn_ready:
+            f.write(f"XGBoost–NN agreement : {agreement_xgb_nn:.2%}\n")
         if knn_ready:
-            f.write(f"XGBoost–KNN agreement : {agreement_xgb_knn:.2%}\n")
-        if bert_ready and knn_ready:
-            f.write(f"BERT–KNN agreement    : {agreement_bert_knn:.2%}\n")
+            f.write(f"XGBoost–KNN agreement: {agreement_xgb_knn:.2%}\n")
+        if nn_ready and knn_ready:
+            f.write(f"NN–KNN agreement     : {agreement_nn_knn:.2%}\n")
     print(f"Saved: {report_file}")
 
     # ---- Comparison plot (all available models) ----
     if HAS_MPL:
         models_to_plot = [
-            ('XGBoost', 'Predicted_Label_XGBoost', '#3498db'),
-            ('BERT',    'Predicted_Label_BERT',    '#e74c3c'),
-            ('KNN',     'Predicted_Label_KNN',     '#2ecc71'),
+            ('XGBoost',        'Predicted_Label_XGBoost', '#3498db'),
+            ('Neural Network', 'Predicted_Label_NN',      '#e74c3c'),
+            ('KNN',            'Predicted_Label_KNN',     '#2ecc71'),
         ]
         available = [(n, c, col) for n, c, col in models_to_plot
                      if c in df.columns and df[c].notna().all()]
@@ -409,7 +416,7 @@ def main():
                 ax.set_title(f'{name} predictions', fontsize=12, fontweight='bold')
                 ax.set_ylabel('Count')
                 ax.set_ylim(0, max(dist.values) + 5)
-            plt.suptitle('XGBoost vs BERT vs KNN – Instagram negative-comment account classification',
+            plt.suptitle('XGBoost vs Neural Network vs KNN – Instagram negative-comment account classification',
                          fontsize=13, fontweight='bold')
             plt.tight_layout()
             plot_path = os.path.join(CONFIG['output_dir'], 'instagram_negative_xgboost_vs_bert_vs_knn_comparison.png')
@@ -418,7 +425,7 @@ def main():
             print(f"Saved: {plot_path}")
 
     print("\n" + "=" * 80)
-    print("TASK 4 (COMPARE) COMPLETE")
+    print("TASK 4 (COMPARE): XGBoost vs Neural Network vs KNN COMPLETE")
     print("=" * 80)
 
 
